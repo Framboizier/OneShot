@@ -1,0 +1,7 @@
+version: 1.0
+main: fr.oneshot.Main
+author: framboizier
+name: OneShot
+commands:
+  setoneshotpos:
+  setoneshothub:
