@@ -13,7 +13,7 @@ public class OneShotHub implements CommandExecutor {
         if (sender instanceof Player) {
             Player p = (Player) sender;
             if (p.isOp()) {
-                Main.getInstance().locations.setHub(p.getLocation());
+                Main.getInstance().getLocations().setHub(p.getLocation());
                 p.sendMessage("§aAction effectuée avec succès !");
                 return true;
             }

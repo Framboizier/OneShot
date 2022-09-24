@@ -1,4 +1,4 @@
-package fr.framboizier.oneshot.Mysql;
+package fr.framboizier.oneshot.mysql;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -9,12 +9,12 @@ import java.util.UUID;
 public class BddManager {
     private static Connection connection;
     private final String jdbcDriver = "com.mysql.jdbc.Driver";
-    private Statement statement;
     private final String urlbase;
     private final String host;
     private final String database;
     private final String username;
     private final String pass;
+    private Statement statement;
 
 
     public BddManager(String urlbase, String host, String database, String username, String pass) {

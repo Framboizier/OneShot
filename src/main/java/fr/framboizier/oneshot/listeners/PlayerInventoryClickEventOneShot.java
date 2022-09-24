@@ -19,57 +19,57 @@ public class PlayerInventoryClickEventOneShot implements Listener {
         if (e.getInventory().getTitle().equalsIgnoreCase(Kit)) {
             e.setCancelled(true);
             if (it.getType().equals(Material.BOW)) {
-                if (Main.getInstance().kit.get(p) == "oneshot") {
+                if (Main.getInstance().getKit().get(p).equals("oneshot")) {
                     p.sendMessage("§cVous avez deja ce kit d'activé !");
                     p.closeInventory();
                     return;
                 }
-                Main.getInstance().kit.put(p, "oneshot");
+                Main.getInstance().getKit().put(p, "oneshot");
                 p.sendMessage("§7Vous avez choisi le kit OneShot !");
                 p.closeInventory();
             }
             if (it.getType().equals(Material.IRON_SWORD)) {
-                if (Main.getInstance().guerrier.get(p.getUniqueId()) == 0) {
+                if (Main.getInstance().getGuerrier().get(p.getUniqueId()).equals(0)) {
                     p.sendMessage("§cVous n'avez pas ce kit !");
                     p.closeInventory();
                     return;
                 }
-                if (Main.getInstance().kit.get(p) == "guerrier") {
+                if (Main.getInstance().getKit().get(p).equals("guerrier")) {
                     p.sendMessage("§cVous avez deja ce kit d'activé !");
                     p.closeInventory();
                     return;
                 }
-                Main.getInstance().kit.put(p, "guerrier");
+                Main.getInstance().getKit().put(p, "guerrier");
                 p.sendMessage("§7Vous avez choisi le kit Guerrier !");
                 p.closeInventory();
             }
             if (it.getType().equals(Material.SLIME_BALL)) {
-                if (Main.getInstance().acrobate.get(p.getUniqueId()) == 0) {
+                if (Main.getInstance().getAcrobate().get(p.getUniqueId()).equals(0)) {
                     p.sendMessage("§cVous n'avez pas ce kit !");
                     p.closeInventory();
                     return;
                 }
-                if (Main.getInstance().kit.get(p) == "acrobate") {
+                if (Main.getInstance().getKit().get(p).equals("acrobate")) {
                     p.sendMessage("§cVous avez deja ce kit d'activé !");
                     p.closeInventory();
                     return;
                 }
-                Main.getInstance().kit.put(p, "acrobate");
+                Main.getInstance().getKit().put(p, "acrobate");
                 p.sendMessage("§7Vous avez choisi le kit Acrobate !");
                 p.closeInventory();
             }
             if (it.getType().equals(Material.IRON_DOOR)) {
-                if (Main.getInstance().tank.get(p.getUniqueId()) == 0) {
+                if (Main.getInstance().getTank().get(p.getUniqueId()).equals(0)) {
                     p.sendMessage("§cVous n'avez pas ce kit !");
                     p.closeInventory();
                     return;
                 }
-                if (Main.getInstance().kit.get(p) == "tank") {
+                if (Main.getInstance().getKit().get(p).equals("tank")) {
                     p.sendMessage("§cVous avez deja ce kit d'activé !");
                     p.closeInventory();
                     return;
                 }
-                Main.getInstance().kit.put(p, "tank");
+                Main.getInstance().getKit().put(p, "tank");
                 p.sendMessage("§7Vous avez choisi le kit Tank !");
                 p.closeInventory();
             }

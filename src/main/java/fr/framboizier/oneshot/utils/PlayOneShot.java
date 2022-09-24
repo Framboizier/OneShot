@@ -16,7 +16,7 @@ public class PlayOneShot {
     }
 
     public void itemHub(Player p) {
-        ItemStack play = new ItemBuilder(Material.DIAMOND_AXE).setDisplayName(Main.getInstance().prefix + "§bJouer").toItemStack();
+        ItemStack play = new ItemBuilder(Material.DIAMOND_AXE).setDisplayName(Main.getInstance().getPrefix() + "§bJouer").toItemStack();
         ItemStack kit = new ItemBuilder(Material.CHEST).setDisplayName("§eSelection de kit").toItemStack();
         p.getInventory().setItem(4, play);
         p.getInventory().setItem(8, kit);
@@ -37,121 +37,121 @@ public class PlayOneShot {
         ItemStack saut = new ItemBuilder(Material.SLIME_BALL).setDisplayName("§aSuper saut").toItemStack();
         ItemStack tortue = new ItemBuilder(Material.IRON_DOOR).setDisplayName("§8Tortue").toItemStack();
         // OBJETS QUI SE DONNE
-        if (Main.getInstance().kit.get(p) == "oneshot") {
+        if (Main.getInstance().getKit().get(p).equals("oneshot")) {
             p.setHealthScale(6.0);
             p.setMaxHealth(6.0);
             p.setHealth(6);
             p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, true, false));
-            if (Main.getInstance().bow.get(p.getUniqueId()) == 1) {
+            if (Main.getInstance().getBow().get(p.getUniqueId()).equals(1)) {
                 p.getInventory().setItem(1, bow);
                 p.getInventory().setItem(0, stone_sword);
                 setArrow(p, 9, 3);
                 p.getInventory().setItem(2, invisible);
-            } else if (Main.getInstance().bow.get(p.getUniqueId()) == 2) {
+            } else if (Main.getInstance().getBow().get(p.getUniqueId()).equals(2)) {
                 p.getInventory().setItem(1, bow);
                 p.getInventory().setItem(0, stone_sword);
                 setArrow(p, 9, 5);
                 p.getInventory().setItem(2, invisible);
-            } else if (Main.getInstance().bow.get(p.getUniqueId()) == 3) {
+            } else if (Main.getInstance().getBow().get(p.getUniqueId()).equals(3)) {
                 p.getInventory().setItem(1, bow);
                 p.getInventory().setItem(0, stone_sword);
                 setArrow(p, 9, 5);
                 p.getInventory().setItem(2, invisible);
-            } else if (Main.getInstance().bow.get(p.getUniqueId()) == 4) {
+            } else if (Main.getInstance().getBow().get(p.getUniqueId()).equals(4)) {
                 p.getInventory().setItem(1, bow);
                 p.getInventory().setItem(0, stone_sword);
                 setArrow(p, 9, 5);
                 p.getInventory().setItem(2, invisible);
-            } else if (Main.getInstance().bow.get(p.getUniqueId()) == 5) {
+            } else if (Main.getInstance().getBow().get(p.getUniqueId()).equals(5)) {
                 p.getInventory().setItem(1, bow);
                 p.getInventory().setItem(0, stone_sword);
                 setArrow(p, 9, 7);
                 p.getInventory().setItem(2, invisible);
             }
         }
-        if (Main.getInstance().kit.get(p) == "guerrier") {
+        if (Main.getInstance().getKit().get(p).equals("guerrier")) {
             p.setHealthScale(4.0);
             p.setMaxHealth(4.0);
             p.setHealth(4);
-            if (Main.getInstance().guerrier.get(p.getUniqueId()) == 1) {
+            if (Main.getInstance().getGuerrier().get(p.getUniqueId()).equals(1)) {
                 p.getInventory().setItem(1, bow);
                 p.getInventory().setItem(0, iron_sword);
                 setArrow(p, 9, 2);
-            } else if (Main.getInstance().guerrier.get(p.getUniqueId()) == 2) {
+            } else if (Main.getInstance().getGuerrier().get(p.getUniqueId()).equals(2)) {
                 p.getInventory().setItem(1, bow);
                 p.getInventory().setItem(0, iron_sword);
                 setArrow(p, 9, 4);
-            } else if (Main.getInstance().guerrier.get(p.getUniqueId()) == 3) {
+            } else if (Main.getInstance().getGuerrier().get(p.getUniqueId()).equals(3)) {
                 p.getInventory().setItem(1, bow);
                 p.getInventory().setItem(0, iron_sword);
                 setArrow(p, 9, 4);
-            } else if (Main.getInstance().guerrier.get(p.getUniqueId()) == 4) {
+            } else if (Main.getInstance().getGuerrier().get(p.getUniqueId()).equals(4)) {
                 p.getInventory().setItem(1, bow);
                 p.getInventory().setItem(0, iron_sword);
                 setArrow(p, 9, 4);
-            } else if (Main.getInstance().guerrier.get(p.getUniqueId()) == 5) {
+            } else if (Main.getInstance().getGuerrier().get(p.getUniqueId()).equals(5)) {
                 p.getInventory().setItem(1, bow);
                 p.getInventory().setItem(0, diamond_sword);
                 setArrow(p, 9, 4);
             }
         }
-        if (Main.getInstance().kit.get(p) == "acrobate") {
+        if (Main.getInstance().getKit().get(p).equals("acrobate")) {
             p.setHealthScale(4.0);
             p.setMaxHealth(4.0);
             p.setHealth(4);
             p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, true, false));
             p.setAllowFlight(true);
-            if (Main.getInstance().acrobate.get(p.getUniqueId()) == 1) {
+            if (Main.getInstance().getAcrobate().get(p.getUniqueId()).equals(1)) {
                 p.getInventory().setItem(1, bow);
                 p.getInventory().setItem(0, stone_sword);
                 setArrow(p, 9, 3);
-            } else if (Main.getInstance().acrobate.get(p.getUniqueId()) == 2) {
+            } else if (Main.getInstance().getAcrobate().get(p.getUniqueId()).equals(2)) {
                 p.getInventory().setItem(1, bow);
                 p.getInventory().setItem(0, stone_sword);
                 setArrow(p, 9, 5);
-            } else if (Main.getInstance().acrobate.get(p.getUniqueId()) == 3) {
-                p.getInventory().setItem(1, bow);
-                p.getInventory().setItem(0, stone_sword);
-                setArrow(p, 9, 5);
-                p.getInventory().setItem(2, saut);
-            } else if (Main.getInstance().acrobate.get(p.getUniqueId()) == 4) {
+            } else if (Main.getInstance().getAcrobate().get(p.getUniqueId()).equals(3)) {
                 p.getInventory().setItem(1, bow);
                 p.getInventory().setItem(0, stone_sword);
                 setArrow(p, 9, 5);
                 p.getInventory().setItem(2, saut);
-            } else if (Main.getInstance().acrobate.get(p.getUniqueId()) == 5) {
+            } else if (Main.getInstance().getAcrobate().get(p.getUniqueId()).equals(4)) {
+                p.getInventory().setItem(1, bow);
+                p.getInventory().setItem(0, stone_sword);
+                setArrow(p, 9, 5);
+                p.getInventory().setItem(2, saut);
+            } else if (Main.getInstance().getAcrobate().get(p.getUniqueId()).equals(5)) {
                 p.getInventory().setItem(1, bow);
                 p.getInventory().setItem(0, stone_sword);
                 setArrow(p, 9, 5);
                 p.getInventory().setItem(2, saut);
             }
         }
-        if (Main.getInstance().kit.get(p) == "tank") {
+        if (Main.getInstance().getKit().get(p).equals("tank")) {
             p.setHealthScale(8.0);
             p.setMaxHealth(8.0);
             p.setHealth(8);
             p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 1, true, false));
-            if (Main.getInstance().tank.get(p.getUniqueId()) == 1) {
+            if (Main.getInstance().getTank().get(p.getUniqueId()).equals(1)) {
                 p.getInventory().setItem(1, bow);
                 p.getInventory().setItem(0, stone_sword);
                 setArrow(p, 9, 3);
                 p.getInventory().setItem(2, tortue);
-            } else if (Main.getInstance().tank.get(p.getUniqueId()) == 2) {
+            } else if (Main.getInstance().getTank().get(p.getUniqueId()).equals(2)) {
                 p.getInventory().setItem(1, bow);
                 p.getInventory().setItem(0, stone_sword);
                 setArrow(p, 9, 3);
                 p.getInventory().setItem(2, tortue);
-            } else if (Main.getInstance().tank.get(p.getUniqueId()) == 3) {
+            } else if (Main.getInstance().getTank().get(p.getUniqueId()).equals(3)) {
                 p.getInventory().setItem(1, bow);
                 p.getInventory().setItem(0, stone_sword);
                 setArrow(p, 9, 5);
                 p.getInventory().setItem(2, tortue);
-            } else if (Main.getInstance().tank.get(p.getUniqueId()) == 4) {
+            } else if (Main.getInstance().getTank().get(p.getUniqueId()).equals(4)) {
                 p.getInventory().setItem(1, bow);
                 p.getInventory().setItem(0, stone_sword);
                 setArrow(p, 9, 5);
                 p.getInventory().setItem(2, tortue);
-            } else if (Main.getInstance().tank.get(p.getUniqueId()) == 5) {
+            } else if (Main.getInstance().getTank().get(p.getUniqueId()).equals(5)) {
                 p.getInventory().setItem(1, bow);
                 p.getInventory().setItem(0, stone_sword);
                 setArrow(p, 9, 5);

@@ -17,6 +17,68 @@ import java.util.Random;
 
 public class PlayerProjecticleHitOneShot implements Listener {
 
+    private static void kill(Player attacker, Player victim, int coins) {
+        Main.getInstance().getPlay().itemHub(victim);
+        victim.playSound(victim.getLocation(), Sound.ANVIL_BREAK, 2, 2);
+        attacker.playSound(victim.getLocation(), Sound.ORB_PICKUP, 2, 2);
+        Main.getInstance().getKillstreak().put(attacker.getPlayer(), Main.getInstance().getKillstreak().get(attacker.getPlayer()) + 1);
+        if (Main.getInstance().getKillstreak().get(attacker).equals(5)) {
+            Bukkit.broadcastMessage(Main.getInstance().getPrefix() + attacker.getDisplayName() + " §fa fait une série de §c5 kill §f!");
+        }
+        if (Main.getInstance().getKillstreak().get(attacker).equals(10)) {
+            Bukkit.broadcastMessage(Main.getInstance().getPrefix() + attacker.getDisplayName() + " §fa fait une série de §c10 kill §f!");
+        }
+        if (Main.getInstance().getKillstreak().get(attacker).equals(15)) {
+            Bukkit.broadcastMessage(Main.getInstance().getPrefix() + attacker.getDisplayName() + " §fa fait une série de §415 kill §f!");
+        }
+        if (Main.getInstance().getKillstreak().get(attacker).equals(20)) {
+            Bukkit.broadcastMessage(Main.getInstance().getPrefix() + attacker.getDisplayName() + " §fa fait une série de §420 kill §f!");
+        }
+        if (Main.getInstance().getKillstreak().get(attacker).equals(25)) {
+            Bukkit.broadcastMessage(Main.getInstance().getPrefix() + attacker.getDisplayName() + " §fa fait une série de §4§l25 kill §f!");
+        }
+        if (Main.getInstance().getKillstreak().get(attacker).equals(30)) {
+            Bukkit.broadcastMessage(Main.getInstance().getPrefix() + attacker.getDisplayName() + " §fVien de faire une §4§lNucleaire §f!");
+            for (Player all : Bukkit.getOnlinePlayers()) {
+                all.playSound(all.getLocation(), Sound.WITHER_SPAWN, 4, 4);
+            }
+        }
+        Main.getInstance().getKillstreak().put(victim, 0);
+
+
+        attacker.sendMessage("§9§lOneShot§8§l»" + " §fVous avez tué §d" + victim.getDisplayName() + " §f! §e+" + coins + " §eCoins");
+        Main.getInstance().getKills().put(attacker.getUniqueId(), Main.getInstance().getKills().get(attacker.getUniqueId()) + 1);
+        Main.getInstance().getCoins().put(attacker.getUniqueId(), Main.getInstance().getCoins().get(attacker.getUniqueId()) + coins);
+        victim.sendMessage("§9§lOneShot§8§l» §d" + attacker.getDisplayName() + " §7vous a tué !");
+        if (Main.getInstance().getKit().get(attacker).equals("guerrier") || Main.getInstance().getKit().get(attacker).equals("acrobate")) {
+            attacker.setHealth(4);
+        }
+        if (Main.getInstance().getKit().get(attacker).equals("oneshot")) {
+            attacker.setHealth(6);
+        }
+        if (Main.getInstance().getKit().get(attacker).equals("tank")) {
+            attacker.setHealth(8);
+        }
+        if (Main.getInstance().getKit().get(victim).equals("guerrier") || Main.getInstance().getKit().get(victim).equals("acrobate")) {
+            victim.setHealth(4);
+            victim.removePotionEffect(PotionEffectType.SPEED);
+            victim.setAllowFlight(false);
+        }
+        if (Main.getInstance().getKit().get(victim).equals("oneshot")) {
+            victim.setHealth(6);
+            victim.removePotionEffect(PotionEffectType.SPEED);
+            victim.removePotionEffect(PotionEffectType.INVISIBILITY);
+        }
+        if (Main.getInstance().getKit().get(victim).equals("tank")) {
+            victim.setHealth(8);
+            victim.removePotionEffect(PotionEffectType.SLOW);
+        }
+        Main.getInstance().getPlayerCoolDown().put(victim.getUniqueId(), false);
+        ItemStack arrow = new ItemBuilder(Material.ARROW, 2).setDisplayName("§7Flèche").toItemStack();
+        attacker.getInventory().addItem(arrow);
+        return;
+    }
+
     @EventHandler
     public void projecticleHit(EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof Arrow) {
@@ -28,21 +90,21 @@ public class PlayerProjecticleHitOneShot implements Listener {
                     e.setCancelled(true);
                     return;
                 }
-                if (Main.getInstance().tortue.contains(victim)) {
+                if (Main.getInstance().getTortue().contains(victim)) {
                     e.setCancelled(true);
                     return;
                 }
-                if (Main.getInstance().invunerability.contains(attacker) || Main.getInstance().invunerability.contains(victim)) {
+                if (Main.getInstance().getInvunerability().contains(attacker) || Main.getInstance().getInvunerability().contains(victim)) {
                     e.setCancelled(true);
                     return;
                 }
-                if (Main.getInstance().kit.get(victim) == "tank") {
+                if (Main.getInstance().getKit().get(victim).equals("tank")) {
                     if (victim.getHealth() <= 8 && victim.getHealth() > 6) {
                         victim.setHealth(4);
                         return;
                     }
                 }
-                if (Main.getInstance().kit.get(victim) == "guerrier") {
+                if (Main.getInstance().getKit().get(victim).equals("guerrier")) {
                     if (victim.getHealth() <= 4 && victim.getHealth() > 2) {
                         victim.setHealth(2);
                         return;
@@ -60,11 +122,11 @@ public class PlayerProjecticleHitOneShot implements Listener {
         if (e.getDamager() instanceof Player) {
             Player victim = (Player) e.getEntity();
             Player attacker = (Player) e.getDamager();
-            if (Main.getInstance().tortue.contains(victim)) {
+            if (Main.getInstance().getTortue().contains(victim)) {
                 e.setCancelled(true);
                 return;
             }
-            if (Main.getInstance().invunerability.contains(attacker) || Main.getInstance().invunerability.contains(victim)) {
+            if (Main.getInstance().getInvunerability().contains(attacker) || Main.getInstance().getInvunerability().contains(victim)) {
                 e.setCancelled(true);
                 return;
             }
@@ -125,67 +187,6 @@ public class PlayerProjecticleHitOneShot implements Listener {
 
             }
         }
-        return;
-    }
-    private static void kill(Player attacker, Player victim, int coins) {
-        Main.getInstance().play.itemHub(victim);
-        victim.playSound(victim.getLocation(), Sound.ANVIL_BREAK, 2, 2);
-        attacker.playSound(victim.getLocation(), Sound.ORB_PICKUP, 2, 2);
-        Main.getInstance().killstreak.put(attacker.getPlayer(), Main.getInstance().killstreak.get(attacker.getPlayer()) + 1);
-        if (Main.getInstance().killstreak.get(attacker) == 5) {
-            Bukkit.broadcastMessage(Main.getInstance().prefix + attacker.getDisplayName() + " §fa fait une série de §c5 kill §f!");
-        }
-        if (Main.getInstance().killstreak.get(attacker) == 10) {
-            Bukkit.broadcastMessage(Main.getInstance().prefix + attacker.getDisplayName() + " §fa fait une série de §c10 kill §f!");
-        }
-        if (Main.getInstance().killstreak.get(attacker) == 15) {
-            Bukkit.broadcastMessage(Main.getInstance().prefix + attacker.getDisplayName() + " §fa fait une série de §415 kill §f!");
-        }
-        if (Main.getInstance().killstreak.get(attacker) == 20) {
-            Bukkit.broadcastMessage(Main.getInstance().prefix + attacker.getDisplayName() + " §fa fait une série de §420 kill §f!");
-        }
-        if (Main.getInstance().killstreak.get(attacker) == 25) {
-            Bukkit.broadcastMessage(Main.getInstance().prefix + attacker.getDisplayName() + " §fa fait une série de §4§l25 kill §f!");
-        }
-        if (Main.getInstance().killstreak.get(attacker) == 30) {
-            Bukkit.broadcastMessage(Main.getInstance().prefix + attacker.getDisplayName() + " §fVien de faire une §4§lNucleaire §f!");
-            for (Player all : Bukkit.getOnlinePlayers()) {
-                all.playSound(all.getLocation(), Sound.WITHER_SPAWN, 4, 4);
-            }
-        }
-        Main.getInstance().killstreak.put(victim, 0);
-
-
-        attacker.sendMessage("§9§lOneShot§8§l»" + " §fVous avez tué §d" + victim.getDisplayName() + " §f! §e+" + coins + " §eCoins");
-        Main.getInstance().kills.put(attacker.getUniqueId(), Main.getInstance().kills.get(attacker.getUniqueId()) + 1);
-        Main.getInstance().coins.put(attacker.getUniqueId(), Main.getInstance().coins.get(attacker.getUniqueId()) + coins);
-        victim.sendMessage("§9§lOneShot§8§l» §d" + attacker.getDisplayName() + " §7vous a tué !");
-        if (Main.getInstance().kit.get(attacker) == "guerrier" || Main.getInstance().kit.get(attacker) == "acrobate") {
-            attacker.setHealth(4);
-        }
-        if (Main.getInstance().kit.get(attacker) == "oneshot") {
-            attacker.setHealth(6);
-        }
-        if (Main.getInstance().kit.get(attacker) == "tank") {
-            attacker.setHealth(8);
-        }
-        if (Main.getInstance().kit.get(victim) == "guerrier" || Main.getInstance().kit.get(victim) == "acrobate") {
-            victim.setHealth(4);
-            victim.removePotionEffect(PotionEffectType.SPEED);
-            victim.setAllowFlight(false);
-        }
-        if (Main.getInstance().kit.get(victim) == "oneshot") {
-            victim.setHealth(6);
-            victim.removePotionEffect(PotionEffectType.SPEED);
-            victim.removePotionEffect(PotionEffectType.INVISIBILITY);
-        }
-        if (Main.getInstance().kit.get(victim) == "tank") {
-            victim.setHealth(8);
-            victim.removePotionEffect(PotionEffectType.SLOW);
-        }
-        Main.getInstance().playercooldown.put(victim.getUniqueId(), false);
-        ItemStack arrow = new ItemBuilder(Material.ARROW, 2).setDisplayName("§7Flèche").toItemStack();
-        attacker.getInventory().addItem(arrow);
         return;
     }
 }

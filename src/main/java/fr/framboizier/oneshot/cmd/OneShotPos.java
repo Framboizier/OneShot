@@ -13,7 +13,7 @@ public class OneShotPos implements CommandExecutor {
         if (sender instanceof Player) {
             Player p = (Player) sender;
             if (p.isOp()) {
-                Main.getInstance().locations.setPos(p.getLocation());
+                Main.getInstance().getLocations().setPos(p.getLocation());
                 p.sendMessage("la position a été défini !");
                 return true;
             }

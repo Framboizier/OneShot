@@ -12,7 +12,7 @@ public class OneShotUpdateBdd implements CommandExecutor {
         if (sender instanceof Player) {
             Player p = (Player) sender;
             if (p.isOp()) {
-                Main.getInstance().bddUpdate.getUpdateBdd(p);
+                Main.getInstance().getBddUpdate().getUpdateBdd(p);
                 p.sendMessage("§aaction effectué avec succès !");
                 return true;
             }
