@@ -1,0 +1,8 @@
+version: 1.0
+main: fr.framboizier.oneshot.Main
+author: framboizier
+name: OneShot
+commands:
+  setoneshotpos:
+  setoneshothub:
+  updatebdd:
